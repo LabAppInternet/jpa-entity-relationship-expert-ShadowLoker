@@ -10,6 +10,7 @@ import cat.tecnocampus.notes2425.domain.Tag;
 import cat.tecnocampus.notes2425.domain.UserLab;
 import cat.tecnocampus.notes2425.persistence.NoteRepository;
 import cat.tecnocampus.notes2425.persistence.UserRepository;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,10 +21,12 @@ import java.util.stream.Collectors;
 public class UserNotesService {
     private final UserRepository userRepository;
     private final NoteRepository noteRepository;
+    private final LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
-    public UserNotesService(UserRepository userRepository, NoteRepository noteRepository) {
+    public UserNotesService(UserRepository userRepository, NoteRepository noteRepository, LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         this.userRepository = userRepository;
         this.noteRepository = noteRepository;
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     public UserDTO findUserByUsername(String username) {
